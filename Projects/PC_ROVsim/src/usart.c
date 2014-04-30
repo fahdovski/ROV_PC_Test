@@ -1,5 +1,7 @@
 #include "stm32f30x.h"
+#include <stdio.h>
 #include <string.h>
+#include <math.h>
 #include "usart.h"
 
 
@@ -91,4 +93,34 @@ void USART_puts(USART_TypeDef* USARTx,__IO char *s)
 		USART_SendData(USARTx, *s);
 		*s++;
 	}
+}
+
+
+//converting data from float to char
+char* conv_f2c(float f)
+{
+  
+    static int pint;
+    static int pfract;
+    static char string[7];
+    static int sign;
+    
+    sign=(int)f;
+    pint =(int)f;
+    pfract= (int)((f - pint)*1000);
+    pint = abs(pint);
+    pfract = abs(pfract);
+    
+    
+    
+     if (sign < 0)
+    {
+      sprintf(string,"-%03d.%03d",pint,pfract);
+    }  
+    else
+    {
+      sprintf(string,"%03d.%03d",pint,pfract);
+    }
+    return string;
+  
 }

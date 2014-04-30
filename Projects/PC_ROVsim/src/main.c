@@ -32,7 +32,7 @@
 #include "usb_desc.h"
 #include "usb_pwr.h"
 #include "usart.h"
-
+#include "string.h"
 
 extern __IO uint8_t Receive_Buffer[64];
 extern __IO  uint32_t Receive_length ;
@@ -69,8 +69,8 @@ int main(void)
     while (1);
   }
  
- 
-  
+ char dat[7];
+ strcpy(dat, conv_f2c(1.53));
   while (1)
   {
    // if (bDeviceState == CONFIGURED)
@@ -86,7 +86,7 @@ int main(void)
       /* Toggle LED3 */
     STM_EVAL_LEDToggle(LED3);  
     /* Insert 100 ms delay */
-     USART_puts( USART1, "Hello daft punk rock ! beyond \n best tube \t ever \n");
+     USART_puts( USART1, dat);
       Delay(500);
   //  }
   } 
